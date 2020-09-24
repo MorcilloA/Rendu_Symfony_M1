@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1 class="text-center">Profil</h1>
+	<p>
+		<a href="{{ path('profile.homepage.form') }}" class="btn btn-primary">
+			Ajouter</a>
+	</p>
+	<table class="table table-stripped">
+		<tr>
+			<td>Gif</td>
+			<td>Catégorie</td>
+			<td>Sous-catégorie</td>
+			<td>Actions</td>
+		</tr>
+		{% for gif in app.user.gifs %}
+			<tr>
+				<td>
+					<a href="{{ path('gif.index', { gifSlug : gif.slug } ) }}">
+						<img class="img-fluid" src="{{ asset("images/" ~ gif.source) }}" alt="un gif">
+					</a>
+				</td>
+				<td>{{ gif.category.parent.name }}</td>
+				<td>{{ gif.category.name }}</td>
+				<td>
+					{# <a href="{{ path('gif.edit', { gifSlug : gif.slug } ) }}" class="btn btn-warning">Modifier</a> #}
+					<a href="" class="btn btn-warning">Modifier</a>
+					<a href="" class="btn btn-danger">Supprimer</a>
+				</td>
+			</tr>
+		{% endfor %}
+	</table>
+
+	{# <label for="email">Gifs</label>
+				<div class="row">s	
+					{% for gif in app.user.gifs %}
+						<div class="col-sm-4">
+							<a href="{{ path('gif.index', { gifSlug : gif.slug } ) }}" class="text-light h3">
+								<img class="img-fluid" src="{{ asset("images/" ~ gif.source) }}" alt="un gif">
+							</a>
+							<a href="" class="btn btn-warning">Modifier</a>
+							<a href="" class="btn btn-danger">Supprimer</a>
+						</div>
+					{% endfor %}
+				</div> #}
+
+{% endblock %}

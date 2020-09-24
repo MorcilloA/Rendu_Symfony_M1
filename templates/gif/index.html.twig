@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+
+{# block body defini dans parent (base.html.twig) #}
+{% block body %}
+	<h1 class="text-center">{{ gif.source | title }}</h1>
+	<br>
+	<div class="row align-items-center">
+		<div class="col-md-6 text-right">
+			<img class="img-fluid" src="{{ asset("images/" ~ gif.source) }}" alt="un gif"><br>
+			{# Gif proposé par
+			<a href="{{ path('profile.index.byUser', { idUser : gif.user.id } ) }}">
+				{{ gif.user.email }}
+			</a> #}
+		</div>
+		<div class="col-md-6">
+			Issu de la sous-catégorie :
+			<a href="{{ path('category.subCategory', { categorySlug : gif.category.parent.slug, subCategorySlug : gif.category.slug } ) }}">
+				{{ gif.category.name }}
+			</a>
+			<br>
+			Issu de la catégorie :
+			<a href="{{ path('category.index', {'slug' : gif.category.parent.slug}) }}">
+				{{ gif.category.parent.name }}
+			</a>
+		</div>
+	</div>
+{% endblock %}

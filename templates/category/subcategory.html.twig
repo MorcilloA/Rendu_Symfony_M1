@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{# block body defini dans parent (base.html.twig) #}
+{% block body %}
+	<h1 class="text-center">{{ subCategory.name | title }}</h1>
+
+	<div class="card-columns">
+		{% for gif in gifs %}
+			{# {{dump(gif)}} #}
+			<div class="card bg-secondary">
+				<a
+					href="{{ path('gif.index', { gifSlug : gif.slug } ) }}">
+					{# asset : permet de cibler le dossier public #}
+					<img src="{{ asset("images/" ~ gif.source) }}" class="card-img img-fluid">
+					<div class="card-img-overlay"></div>
+				</a>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

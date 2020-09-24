@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1 class="text-center">Formulaire</h1>
+	
+	{# {{ form(form) }} #}
+
+	{{ form_start(form, {'attr' : { novalidate : 'novalidate' } } ) }}
+
+		{{ form_label(form.source, "Source de l'image : ") }}
+		{{ form_help(form.source) }}
+		{{ form_widget(form.source) }}
+
+		{{ form_label(form.category, "Catégorie : ") }}
+		{{ form_widget(form.category) }}
+
+		<input type="submit" class="btn btn-info">
+	
+	{{ form_end(form) }}
+
+{% endblock %}

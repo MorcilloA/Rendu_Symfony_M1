@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+	<h1 class="text-center">Résultats de la recherche "{{ search }}"
+	</h1>
+
+	{% set supCatCpt = 0 %}
+	{% for key in categories | keys %}
+		{% if not (key matches '/^\\d+$/') %}
+			{% set supCatCpt = supCatCpt + 1 %}
+		{% endif %}
+	{% endfor %}
+
+	{% if supCategories|length > 0 %}
+		<h2>Super catégories trouvées :
+		</h2>
+	{% endif %}
+
+	{% for key, supCategory in supCategories %}
+		<h3 class="text-center">{{ key | title }}</h3>
+		{% for subCategory in supCategory %}
+			<h4>{{ subCategory.name }}</h4>
+			<div class="card-columns">
+				{% for gif in subCategory.gifs %}
+					<a href="{{ path('gif.index', { gifSlug : gif.slug } ) }}">
+						<div class="card bg-secondary">
+							<img src="{{ asset("images/" ~ gif.source) }}" class="card-img img-fluid">
+							<div class="card-img-overlay"></div>
+						</div>
+					</a>
+				{% endfor %}
+			</div>
+		{% endfor %}
+	{% endfor %}
+
+	{% if categories|length > 0 %}
+		<h2>Sous-catégories trouvées :
+		</h2>
+	{% endif %}
+
+	{% for category in categories %}
+		<h3>{{ category.name }}</h3>
+		<div class="card-columns">
+			{% for gif in category.gifs %}
+				<a href="{{ path('gif.index', { gifSlug : gif.slug } ) }}">
+					<div class="card bg-secondary">
+						<img src="{{ asset("images/" ~ gif.source) }}" class="card-img img-fluid">
+						<div class="card-img-overlay"></div>
+					</div>
+				</a>
+			{% endfor %}
+		</div>
+	{% endfor %}
+
+{% endblock %}
